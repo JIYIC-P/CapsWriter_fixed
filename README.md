@@ -4,4 +4,4 @@
 ## 1 流程图
 ```mermaid
 graph TD
-A[node] -- > B[node]
+A[node] -- > B[node];
