@@ -3,6 +3,12 @@
 
 ## 1 流程图
 ### 1.图的声明
+```markdown
+```mermaid
+graph TD;
+    A[节点A] --> B[节点B];
+    B --> C[节点C];
+```
 
 ```mermaid
 graph TD;
