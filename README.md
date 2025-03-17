@@ -9,7 +9,7 @@ main[开始入口] --> A{判断启动参数};
 A -->|是| B[init_file];
 A -->|否| C[init_mic];
 B --> D[others];
-C -->|try| E[asyncio.run(main_mic()),异步IO编程，可以使main_mic函数实现异步多线程运行];
+C -->|try| E[asyncio.run\(main_mic\(\)\),异步IO编程，可以使main_mic函数实现异步多线程运行];
 E --> F[调用client_cosmic.Cosmic类（公用类），初始化
     Cosmic.loop = asyncio.get_event_loop()
     Cosmic.queue_in = asyncio.Queue()
