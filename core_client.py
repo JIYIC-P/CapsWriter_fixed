@@ -55,7 +55,7 @@ async def main_mic():
     # 更新热词
     update_hot_all()
 
-    # 实时更新热词
+    # 实时更新热词，实现运行主程序时更新热词的功能
     observer = observe_hot()
 
     # 打开音频流
