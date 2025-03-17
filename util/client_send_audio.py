@@ -48,6 +48,7 @@ async def send_audio():
         # 开始取数据
         # task: {'type', 'time', 'data'}
         while task := await Cosmic.queue_in.get():
+            #每个音频队列在拿去之后任务结束
             Cosmic.queue_in.task_done()
             if task['type'] == 'begin':
                 time_start = task['time']

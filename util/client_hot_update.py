@@ -77,9 +77,10 @@ def update_hot_all():
 
 
 def observe_hot():
-    observer = Observer()
+    observer = Observer()            #初始化监听器
+    #将处理函数和监听器和处理文件夹连接起来
     observer.schedule(HotHandler(), '.', recursive=False)
-    observer.start()
+    observer.start()                 #开始监听
     return observer
 
 class HotHandler(FileSystemEventHandler):

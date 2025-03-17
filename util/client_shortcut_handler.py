@@ -18,7 +18,7 @@ released = True
 event = Event()
 
 
-def shortcut_correct(e: keyboard.KeyboardEvent):
+def  shortcut_correct(e: keyboard.KeyboardEvent):
     # 在我的 Windows 电脑上，left ctrl 和 right ctrl 的 keycode 都是一样的，
     # keyboard 库按 keycode 判断触发
     # 即便设置 right ctrl 触发，在按下 left ctrl 时也会触发
