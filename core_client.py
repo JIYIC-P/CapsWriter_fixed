@@ -12,7 +12,7 @@ from typing import List
 
 import typer
 import colorama
-import keyboard
+#import keyboard
 
 from config import ClientConfig as Config
 from util.client_cosmic import console, Cosmic
@@ -95,6 +95,7 @@ async def main_file(files: List[Path]):
 
 
 def init_mic():
+    print("尝试打开麦克风")
     try:
         asyncio.run(main_mic())
     except KeyboardInterrupt:
