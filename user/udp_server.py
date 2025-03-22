@@ -1,7 +1,8 @@
 import asyncio
 from user.usr_shortcut_handler import udp_mode
 from util.client_cosmic import Cosmic
-
+transport = None 
+addr = ('127.0.0.1', 9999)
 class EchoServerProtocol(asyncio.DatagramProtocol):
     
     def connection_made(self, transport):
@@ -12,12 +13,17 @@ class EchoServerProtocol(asyncio.DatagramProtocol):
         udp_mode(message)
 
 async def start():
+    global transport
     transport, protocol = await Cosmic.loop.create_datagram_endpoint(
         lambda: EchoServerProtocol(),
         local_addr=('127.0.0.1', 9999)
     )
     print("UDP服务器启动，监听端口9999...")
 
+async def send(text:str):
+    global transport 
+    global addr
+    await transport.sendto(text.encode(),addr=addr)
 
 async def main():
     await start()
