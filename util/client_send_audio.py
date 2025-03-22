@@ -14,6 +14,7 @@ import uuid
 async def send_message(message):
     # 发送数据
     #if Cosmic.websocket is None or not Cosmic.websocket.State.CLOSED:
+    await asyncio.sleep(0.1)
     if Cosmic.websocket is None:
         if message['is_final']:
             Cosmic.audio_files.pop(message['task_id'])
@@ -30,6 +31,7 @@ async def send_message(message):
 
 
 async def send_audio():
+    await asyncio.sleep(0.1)
     try:
 
         # 生成唯一任务 ID

@@ -1,7 +1,6 @@
 from asyncio import Queue, AbstractEventLoop
 import websockets
 import sounddevice as sd
-import sys
 from pathlib import Path
 from typing import List, Union
 
@@ -23,3 +22,4 @@ class Cosmic:
     audio_files = {}
     stream: Union[None, sd.InputStream] = None
     kwd_list: List[str] = []
+    

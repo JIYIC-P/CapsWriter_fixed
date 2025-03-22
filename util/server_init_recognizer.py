@@ -61,6 +61,8 @@ def init_recognizer(queue_in: Queue, queue_out: Queue, sockets_id):
             continue
 
         if task.socket_id not in sockets_id:    # 检查任务所属的连接是否存活
+            print(sockets_id)
+            print(task.socket_id)
             continue
 
         result = recognize(recognizer, punc_model, task)   # 执行识别

@@ -5,6 +5,7 @@ import platform
 import asyncio
 
 
+
 async def type_result(text):
 
     # 模拟粘贴
@@ -18,7 +19,6 @@ async def type_result(text):
 
         # 复制结果
         pyclip.copy(text)
-
         # 粘贴结果
         if platform.system() == 'Darwin':
             keyboard.press(55)

@@ -11,14 +11,13 @@ from util.client_rename_audio import rename_audio
 from util.client_strip_punc import strip_punc
 from util.client_write_md import write_md
 from util.client_type_result import type_result
-
+import util.speaker as speaker
 
 async def recv_result():
     if not await check_websocket():
         console.print('[red]连接失败\n')
         return
     console.print('[green]连接成功\n')
-
     try:
         while True:
             # 接收消息
@@ -36,9 +35,9 @@ async def recv_result():
 
             # 热词替换
             text = hot_sub(text)
-
+            
             # 打字
-            await type_result(text)
+            #await type_result(text)
 
             if Config.save_audio:
                 # 重命名录音文件
@@ -51,6 +50,9 @@ async def recv_result():
             console.print(f'    转录时延：{delay:.2f}s')
             console.print(f'    识别结果：[green]{text}')
             console.line()
+
+            #说话
+            speaker.speak(text)
 
     except websockets.ConnectionClosedError:
         console.print('[red]连接断开\n')
