@@ -1,7 +1,6 @@
 from asyncio import Queue, AbstractEventLoop
 import websockets
 import sounddevice as sd
-from pathlib import Path
 from typing import List, Union
 
 from rich.console import Console 

@@ -1,6 +1,6 @@
 import keyboard
 from util.client_cosmic import Cosmic, console
-from config import ClientConfig as Config
+import config 
 
 import time
 import asyncio
@@ -24,7 +24,7 @@ def  shortcut_correct(e: keyboard.KeyboardEvent):
     # 即便设置 right ctrl 触发，在按下 left ctrl 时也会触发
     # 不过，虽然两个按键的 keycode 一样，但事件 e.name 是不一样的
     # 在这里加一个判断，如果 e.name 不是我们期待的按键，就返回
-    key_expect = keyboard.normalize_name(Config.shortcut).replace('left ', '')
+    key_expect = keyboard.normalize_name(config.ClientConfig.shortcut).replace('left ', '')
     key_actual = e.name.replace('left ', '')
     if key_expect != key_actual: return False
     return True
@@ -88,7 +88,7 @@ def finish_task():
 
 def count_down(e: Event):
     """按下后，开始倒数"""
-    time.sleep(Config.threshold)
+    time.sleep(config.ClientConfig.threshold)
     e.set()
 
 
@@ -106,7 +106,7 @@ def manage_task(e: Event):
         launch_task()
 
     # 及时松开按键了，是单击
-    if e.wait(timeout=Config.threshold * 0.8):
+    if e.wait(timeout=config.ClientConfig.threshold * 0.8):
         # 如果有任务在运行，就结束任务
         if Cosmic.on and on:
             finish_task()
@@ -118,7 +118,7 @@ def manage_task(e: Event):
             cancel_task()
 
         # 长按，发送按键
-        keyboard.send(Config.shortcut)
+        keyboard.send(config.ClientConfig.shortcut)
 
 
 def click_mode(e: keyboard.KeyboardEvent):
@@ -151,15 +151,15 @@ def hold_mode(e: keyboard.KeyboardEvent):
         duration = time.time() - Cosmic.on
 
         # 取消或停止任务
-        if duration < Config.threshold:
+        if duration < config.ClientConfig.threshold:
             cancel_task()
         else:
             finish_task()
 
             # 松开快捷键后，再按一次，恢复 CapsLock 或 Shift 等按键的状态
-            if Config.restore_key:
+            if config.ClientConfig.restore_key:
                 time.sleep(0.01)
-                keyboard.send(Config.shortcut)
+                keyboard.send(config.ClientConfig.shortcut)
 
 
 
@@ -189,9 +189,10 @@ def click_handler(e: keyboard.KeyboardEvent) -> None:
 
 
 def bond_shortcut():
-    if Config.hold_mode:
-        keyboard.hook_key(Config.shortcut, hold_handler, suppress=Config.suppress)
+    config.ConfigManager.load_config()
+    if config.ClientConfig.hold_mode:
+        keyboard.hook_key(config.ClientConfig.shortcut, hold_handler, suppress=config.ClientConfig.suppress)
     else:
         # 单击模式，必须得阻塞快捷键
         # 收到长按时，再模拟发送按键
-        keyboard.hook_key(Config.shortcut, click_handler, suppress=True)
+        keyboard.hook_key(config.ClientConfig.shortcut, click_handler, suppress=True)

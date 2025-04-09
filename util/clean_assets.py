@@ -5,7 +5,6 @@ if not all([find_spec(x) for x in relies]):
     input('按回车退出')
 
 import re
-import os
 import sys
 from os import remove
 from pathlib import Path

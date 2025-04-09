@@ -2,6 +2,7 @@
 import websockets 
 from util.client_cosmic import Cosmic, console
 from config import ClientConfig as Config
+import config
 
 
 class Handler:
@@ -21,7 +22,9 @@ class Handler:
 
 
 async def check_websocket() -> bool:
-    if Cosmic.websocket and not Cosmic.websocket.closed:
+    config.ConfigManager.load_config()
+    print(f"{Config.addr}:{Config.port}")
+    if Cosmic.websocket and not Cosmic.websocket.close:
         return True
     for _ in range(3):
         with Handler():
