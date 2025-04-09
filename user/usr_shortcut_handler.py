@@ -135,7 +135,7 @@ def finish_task():
     )
 
 
-# ======================长按模式==================================
+# ======================udp模式==================================
 
 def udp_mode(text):
     global task
@@ -150,5 +150,7 @@ def udp_mode(text):
         # 取消或停止任务
         if duration < Config.threshold:
             cancel_task()
+            print("cancle")
         else:
             finish_task()
+            print("finish")

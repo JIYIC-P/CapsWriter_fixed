@@ -5,6 +5,7 @@ from multiprocessing import Process, Manager
 from platform import system
 
 import websockets
+import config
 from config import ServerConfig as Config
 from util.server_cosmic import Cosmic, console
 from util.server_check_model import check_model
@@ -62,6 +63,7 @@ async def main():
 
 
 def init():
+    config.ConfigManager.load_config()#读取配置
     try:
         asyncio.run(main())
     except KeyboardInterrupt:           # Ctrl-C 停止
